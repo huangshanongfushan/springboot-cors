@@ -3,21 +3,16 @@ springboot springsecurity basic cors
 1.基于springboot
 2.集成springsecurity
 3.权限校验basic方式,解决跨域同源问题
-4.public class WebConfig extends WebMvcConfigurerAdapter {
-    /**
-     * 跨域放开
-     * @param registry
-     */
-    
+4.跨域放开
+public class WebConfig extends WebMvcConfigurerAdapter {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowedOrigins("*");
     }
-
 }
-5.  frameOptions().disable()禁用同源限制,antMatchers(HttpMethod.OPTIONS).permitAll()放开跨域时的预请求(OPTION请求),
+5.frameOptions().disable()禁用同源限制,antMatchers(HttpMethod.OPTIONS).permitAll()放开跨域时的预请求(OPTION请求),
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable().and()
                 .authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll()
