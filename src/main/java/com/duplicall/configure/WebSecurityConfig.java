@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * @author mli
- * @create 2017-06-07 20:39
+ * @create 2017-09-29 20:39
  **/
 
 @Configuration
@@ -21,6 +21,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 权限校验
+     *
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable().and()
@@ -29,14 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable().cors().disable()
                 .httpBasic().and();
     }
-
-  /*  @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll().and().csrf().disable().httpBasic();
-        *//*http.httpBasic();
-        http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);*//*
-    }*/
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
